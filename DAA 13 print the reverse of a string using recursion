@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+void reverseString(char *str) {
+    
+    if (*str == '\0') {
+        return;
+    }
+
+    reverseString(str + 1);
+
+    printf("%c", *str);
+}
+
+int main() {
+    
+    char inputString[100];
+
+    printf("Enter a string: ");
+    scanf("%s", inputString);
+
+    printf("Reverse of the string: ");
+    reverseString(inputString);
+
+    printf("\n");
+
+    return 0;
+}
