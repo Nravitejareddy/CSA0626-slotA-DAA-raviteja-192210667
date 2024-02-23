@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
+
+bool is_prime(int num, int primes[], int size) {
+    for (int i = 0; i < size; i++) {
+        if (primes[i] * primes[i] > num)
+            return true;
+        if (num % primes[i] == 0)
+            return false;
+    }
+    return true;
+}
+
+void generate_primes(int limit, int current, int primes[], int *size) {
+    if (current > limit) {
+        return;
+    }
+
+    if (is_prime(current, primes, *size)) {
+        primes[(*size)++] = current;
+    }
+
+    generate_primes(limit, current + 1, primes, size);
+}
+
+int main() {
+    int limit;
+    printf("Enter the limit for prime numbers: ");
+    scanf("%d", &limit);
+
+    int primes[1000]; // Assuming a limit, adjust if needed
+    int size = 0;
+
+    generate_primes(limit, 2, primes, &size);
+
+    printf("Prime numbers up to %d are: ", limit);
+    for (int i = 0; i < size; i++) {
+        printf("%d ", primes[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
